@@ -6,7 +6,6 @@ import {
   VideoOff, 
   Volume2, 
   VolumeX,
-  Sparkles,
   Brain,
   Activity,
   Send

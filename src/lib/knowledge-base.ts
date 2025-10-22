@@ -342,6 +342,10 @@ APLICAÇÃO CLÍNICA:
     );
   }
 
+  buscarPorId(id: string): ConhecimentoItem | null {
+    return this.conhecimentos.find(c => c.id === id && c.ativo) || null;
+  }
+
   obterConhecimentoPorCategoria(categoria: string): ConhecimentoItem[] {
     return this.conhecimentos.filter(c => c.ativo && c.categoria === categoria);
   }
