@@ -1,0 +1,5 @@
+*.ts text diff
+*.tsx text diff
+*.css text diff
+*.html text diff
+
