@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { knowledgeBase } from '../lib/knowledge-base';
-import { SistemaIMRETriaxial } from '../lib/imre-system-triaxial';
+import { IMRETriaxialEngine } from '../lib/imre-system-triaxial';
 import './AvatarNoaMultimodal.css';
 
 interface AvatarNoaMultimodalProps {
@@ -29,7 +29,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
   const [transcricao, setTranscricao] = useState('');
   const [mensagemTexto, setMensagemTexto] = useState('');
   const [historico, setHistorico] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
-  const [sistemaIMRE, setSistemaIMRE] = useState<SistemaIMRETriaxial | null>(null);
+  const [sistemaIMRE, setSistemaIMRE] = useState<IMRETriaxialEngine | null>(null);
   const [emAvaliacao, setEmAvaliacao] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
@@ -183,7 +183,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
         mensagemLower.includes('quero uma avaliação')) {
       
       // Iniciar sistema IMRE
-      const novoIMRE = new SistemaIMRETriaxial();
+      const novoIMRE = new IMRETriaxialEngine();
       setSistemaIMRE(novoIMRE);
       setEmAvaliacao(true);
       
