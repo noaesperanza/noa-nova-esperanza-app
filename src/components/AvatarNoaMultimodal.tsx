@@ -574,7 +574,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
 
       {/* Histórico de Conversação */}
       {historico.length > 0 && (
-        <div className="mt-6 bg-white/95 backdrop-blur-sm border-2 border-white/20 rounded-xl p-4 max-h-96 overflow-y-auto shadow-2xl">
+        <div className="mt-6 bg-white/98 backdrop-blur-sm border-2 border-white/40 rounded-xl p-4 max-h-96 overflow-y-auto shadow-2xl">
           <div className="space-y-3">
             {historico.map((msg, i) => (
               <div
@@ -583,13 +583,19 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
                   "p-3 rounded-lg shadow-md",
                   msg.role === 'user' 
                     ? "bg-blue-50 border-l-4 border-blue-500 ml-8" 
-                    : "bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500 mr-8"
+                    : "bg-gradient-to-r from-indigo-100 to-purple-100 border-l-4 border-indigo-500 mr-8"
                 )}
               >
-                <div className="text-xs font-semibold mb-1 text-gray-700">
+                <div className={cn(
+                  "text-xs font-semibold mb-1",
+                  msg.role === 'user' ? "text-blue-700" : "text-indigo-700"
+                )}>
                   {msg.role === 'user' ? 'Você' : 'Nôa Esperanza'}
                 </div>
-                <div className="text-sm text-gray-800">{msg.content}</div>
+                <div className={cn(
+                  "text-sm",
+                  msg.role === 'user' ? "text-gray-800" : "text-gray-900"
+                )}>{msg.content}</div>
               </div>
             ))}
           </div>
