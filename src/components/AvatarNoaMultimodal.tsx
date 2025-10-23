@@ -13,6 +13,8 @@ import {
 import { cn } from '../lib/utils';
 import { knowledgeBase } from '../lib/knowledge-base';
 import { IMRETriaxialEngine } from '../lib/imre-system-triaxial';
+import { pacienteDatabase } from '../lib/patient-database';
+import { imreDataCollector } from '../lib/imre-data-collector';
 import './AvatarNoaMultimodal.css';
 
 interface AvatarNoaMultimodalProps {
@@ -31,6 +33,8 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
   const [historico, setHistorico] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const [sistemaIMRE, setSistemaIMRE] = useState<IMRETriaxialEngine | null>(null);
   const [emAvaliacao, setEmAvaliacao] = useState(false);
+  const [pacienteId, setPacienteId] = useState<string | null>(null);
+  const [contextoLongitudinal, setContextoLongitudinal] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const recognitionRef = useRef<any>(null);
@@ -125,17 +129,34 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
     
     setPensando(true);
     
+    // Construir contexto longitudinal se disponível
+    let contextoCompleto = contextoLongitudinal;
+    if (pacienteId) {
+      try {
+        const contexto = await pacienteDatabase.construirContextoIA(pacienteId);
+        contextoCompleto = contexto;
+        setContextoLongitudinal(contexto);
+      } catch (error) {
+        console.error('Erro ao obter contexto:', error);
+      }
+    }
+    
     // Simulação de chamada à API GPT-4.1 com reasoning
     // Em produção, seria uma chamada real à API OpenAI
     setTimeout(() => {
       setPensando(false);
       setFalando(true);
       
-      // Simular resposta da IA
-      const resposta = gerarRespostaContextual(mensagem, context);
+      // Simular resposta da IA com contexto
+      const resposta = gerarRespostaContextual(mensagem, context, contextoCompleto);
       
       // Adicionar resposta ao histórico
       setHistorico(prev => [...prev, { role: 'assistant', content: resposta }]);
+      
+      // Salvar interação no banco de dados
+      if (pacienteId) {
+        pacienteDatabase.salvarInteracaoIA(pacienteId, mensagem, resposta, contextoCompleto);
+      }
       
       // Síntese de voz
       if (somAtivo) {
@@ -159,15 +180,35 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
   };
 
   // Gerar resposta contextual usando a base de conhecimento
-  const gerarRespostaContextual = (mensagem: string, contexto: string) => {
+  const gerarRespostaContextual = (mensagem: string, contexto: string, contextoLongitudinal?: string) => {
     const mensagemLower = mensagem.toLowerCase();
     
     // Se estiver em avaliação IMRE, processar resposta
     if (emAvaliacao && sistemaIMRE) {
       const resultado = sistemaIMRE.processarResposta(mensagem);
+      
+      // Coletar dados IMRE automaticamente
+      imreDataCollector.processarRespostaIMRE(sistemaIMRE.obterBlocoAtual()?.id || 0, mensagem);
+      
       if (resultado.proximaPergunta) {
         return resultado.proximaPergunta;
       } else if (resultado.relatorio) {
+        // Finalizar coleta de dados
+        const dadosColetados = imreDataCollector.finalizarColeta();
+        
+        // Salvar dados no banco
+        if (pacienteId) {
+          // Atualizar paciente com dados IMRE
+          pacienteDatabase.obterPaciente(pacienteId).then(paciente => {
+            if (paciente) {
+              paciente.aberturaExponencial = dadosColetados.abertura;
+              paciente.desenvolvimentoIndiciario = dadosColetados.desenvolvimento;
+              paciente.fechamentoConsensual = dadosColetados.fechamento;
+              pacienteDatabase.salvarPaciente(paciente);
+            }
+          });
+        }
+        
         setEmAvaliacao(false);
         setSistemaIMRE(null);
         return resultado.relatorio;
@@ -186,6 +227,15 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
       const novoIMRE = new IMRETriaxialEngine();
       setSistemaIMRE(novoIMRE);
       setEmAvaliacao(true);
+      
+      // Iniciar coleta de dados
+      imreDataCollector.iniciarColeta();
+      
+      // Criar ou obter ID do paciente
+      if (!pacienteId) {
+        const novoPacienteId = `paciente_${Date.now()}`;
+        setPacienteId(novoPacienteId);
+      }
       
       const saudacao = mensagem.includes('Ricardo') || mensagem.includes('Valença') 
         ? '🌬️ Bons ventos soprem, Dr. Ricardo! ' 
@@ -322,6 +372,20 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
       iniciarCamera();
     }
   };
+
+  // Inicializar banco de dados
+  useEffect(() => {
+    const inicializarDB = async () => {
+      try {
+        await pacienteDatabase.inicializar();
+        console.log('Banco de dados inicializado com sucesso');
+      } catch (error) {
+        console.error('Erro ao inicializar banco de dados:', error);
+      }
+    };
+    
+    inicializarDB();
+  }, []);
 
   // Cleanup ao desmontar
   useEffect(() => {
