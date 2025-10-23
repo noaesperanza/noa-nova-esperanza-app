@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { knowledgeBase } from '../lib/knowledge-base';
+import { SistemaIMRETriaxial } from '../lib/imre-system-triaxial';
 import './AvatarNoaMultimodal.css';
 
 interface AvatarNoaMultimodalProps {
@@ -28,6 +29,8 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
   const [transcricao, setTranscricao] = useState('');
   const [mensagemTexto, setMensagemTexto] = useState('');
   const [historico, setHistorico] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [sistemaIMRE, setSistemaIMRE] = useState<SistemaIMRETriaxial | null>(null);
+  const [emAvaliacao, setEmAvaliacao] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const recognitionRef = useRef<any>(null);
@@ -159,6 +162,18 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
   const gerarRespostaContextual = (mensagem: string, contexto: string) => {
     const mensagemLower = mensagem.toLowerCase();
     
+    // Se estiver em avaliação IMRE, processar resposta
+    if (emAvaliacao && sistemaIMRE) {
+      const resultado = sistemaIMRE.processarResposta(mensagem);
+      if (resultado.proximaPergunta) {
+        return resultado.proximaPergunta;
+      } else if (resultado.relatorio) {
+        setEmAvaliacao(false);
+        setSistemaIMRE(null);
+        return resultado.relatorio;
+      }
+    }
+    
     // IMRE / Avaliação Clínica - PRIORIDADE MÁXIMA
     if (mensagemLower.includes('avaliação clínica') || 
         mensagemLower.includes('avaliacao clinica') ||
@@ -166,6 +181,11 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
         mensagemLower.includes('iniciar avaliação') ||
         mensagemLower.includes('fazer avaliação') ||
         mensagemLower.includes('quero uma avaliação')) {
+      
+      // Iniciar sistema IMRE
+      const novoIMRE = new SistemaIMRETriaxial();
+      setSistemaIMRE(novoIMRE);
+      setEmAvaliacao(true);
       
       const saudacao = mensagem.includes('Ricardo') || mensagem.includes('Valença') 
         ? '🌬️ Bons ventos soprem, Dr. Ricardo! ' 
