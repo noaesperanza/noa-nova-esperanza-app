@@ -583,7 +583,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
                   "p-3 rounded-lg shadow-md",
                   msg.role === 'user' 
                     ? "bg-blue-500 border-l-4 border-blue-600 ml-8" 
-                    : "bg-gradient-to-r from-slate-700 to-slate-800 border-l-4 border-indigo-400 mr-8"
+                    : "bg-black border-l-4 border-indigo-400 mr-8"
                 )}
               >
                 <div className={cn(
@@ -593,7 +593,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
                   {msg.role === 'user' ? 'Você' : 'Nôa Esperanza'}
                 </div>
                 <div className={cn(
-                  "text-sm",
+                  "text-sm font-medium",
                   msg.role === 'user' ? "text-white" : "text-white"
                 )}>{msg.content}</div>
               </div>
