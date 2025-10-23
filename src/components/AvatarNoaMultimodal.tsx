@@ -489,12 +489,12 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
         </div>
 
         {/* Indicador de Status */}
-        <div className="absolute -top-2 -right-2 px-3 py-1 rounded-full bg-card border border-border shadow-lg text-xs font-semibold flex items-center gap-2">
+        <div className="absolute -top-2 -right-2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-sm border-2 border-white/30 shadow-xl text-xs font-semibold flex items-center gap-2">
           <div className={cn(
             "w-2 h-2 rounded-full",
-            pensando ? "bg-yellow-500 animate-pulse" : falando ? "bg-green-500 animate-pulse" : "bg-primary"
+            pensando ? "bg-yellow-500 animate-pulse" : falando ? "bg-green-500 animate-pulse" : "bg-blue-500"
           )} />
-          <span>
+          <span className="text-gray-800">
             {pensando ? 'Pensando...' : falando ? 'Falando...' : 'Ouvindo'}
           </span>
         </div>
@@ -544,22 +544,22 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
 
       {/* Transcrição em Tempo Real */}
       {transcricao && (
-        <div className="mt-6 p-4 bg-card border border-border rounded-xl">
+        <div className="mt-6 p-4 bg-white/90 backdrop-blur-sm border-2 border-white/30 rounded-xl shadow-lg">
           <div className="flex items-center gap-2 mb-2">
-            <Activity className="text-primary" size={16} />
-            <span className="text-xs font-semibold text-muted-foreground">Você disse:</span>
+            <Activity className="text-blue-600" size={16} />
+            <span className="text-xs font-semibold text-gray-700">Você disse:</span>
           </div>
-          <p className="text-sm">{transcricao}</p>
+          <p className="text-sm text-gray-800">{transcricao}</p>
         </div>
       )}
 
       {/* Informações Técnicas */}
-      <div className="mt-6 p-4 bg-muted rounded-xl">
+      <div className="mt-6 p-4 bg-white/80 backdrop-blur-sm border border-white/30 rounded-xl shadow-lg">
         <div className="flex items-center gap-2 mb-2">
           <Brain className="text-purple-600" size={16} />
-          <span className="text-xs font-semibold">Powered by GPT-4.1 with Reasoning</span>
+          <span className="text-xs font-semibold text-gray-700">Powered by GPT-4.1 with Reasoning</span>
         </div>
-        <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
+        <div className="grid grid-cols-3 gap-2 text-xs text-gray-600">
           <div>
             <span className="font-semibold">Contexto:</span> {context}
           </div>
@@ -574,22 +574,22 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
 
       {/* Histórico de Conversação */}
       {historico.length > 0 && (
-        <div className="mt-6 bg-card border border-border rounded-xl p-4 max-h-96 overflow-y-auto">
+        <div className="mt-6 bg-white/95 backdrop-blur-sm border-2 border-white/20 rounded-xl p-4 max-h-96 overflow-y-auto shadow-2xl">
           <div className="space-y-3">
             {historico.map((msg, i) => (
               <div
                 key={i}
                 className={cn(
-                  "p-3 rounded-lg",
+                  "p-3 rounded-lg shadow-md",
                   msg.role === 'user' 
-                    ? "bg-primary/10 ml-8" 
-                    : "bg-muted mr-8"
+                    ? "bg-blue-50 border-l-4 border-blue-500 ml-8" 
+                    : "bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500 mr-8"
                 )}
               >
-                <div className="text-xs font-semibold mb-1 opacity-70">
+                <div className="text-xs font-semibold mb-1 text-gray-700">
                   {msg.role === 'user' ? 'Você' : 'Nôa Esperanza'}
                 </div>
-                <div className="text-sm">{msg.content}</div>
+                <div className="text-sm text-gray-800">{msg.content}</div>
               </div>
             ))}
           </div>
@@ -604,7 +604,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
             value={mensagemTexto}
             onChange={(e) => setMensagemTexto(e.target.value)}
             placeholder="Digite sua mensagem aqui..."
-            className="flex-1 px-4 py-3 rounded-lg border border-border bg-card/50 focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]"
+            className="flex-1 px-4 py-3 rounded-lg border-2 border-white/30 bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-lg"
             disabled={pensando || falando}
           />
           <button
