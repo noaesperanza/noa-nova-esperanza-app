@@ -582,19 +582,19 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
                 className={cn(
                   "p-3 rounded-lg shadow-md",
                   msg.role === 'user' 
-                    ? "bg-blue-50 border-l-4 border-blue-500 ml-8" 
-                    : "bg-gradient-to-r from-gray-100 to-gray-200 border-l-4 border-indigo-500 mr-8"
+                    ? "bg-blue-500 border-l-4 border-blue-600 ml-8" 
+                    : "bg-gradient-to-r from-slate-700 to-slate-800 border-l-4 border-indigo-400 mr-8"
                 )}
               >
                 <div className={cn(
                   "text-xs font-semibold mb-1",
-                  msg.role === 'user' ? "text-blue-700" : "text-indigo-700"
+                  msg.role === 'user' ? "text-blue-100" : "text-indigo-200"
                 )}>
                   {msg.role === 'user' ? 'Você' : 'Nôa Esperanza'}
                 </div>
                 <div className={cn(
                   "text-sm",
-                  msg.role === 'user' ? "text-gray-800" : "text-black"
+                  msg.role === 'user' ? "text-white" : "text-white"
                 )}>{msg.content}</div>
               </div>
             ))}
