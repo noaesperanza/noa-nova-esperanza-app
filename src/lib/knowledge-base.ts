@@ -58,7 +58,6 @@ ESPECIALIDADES:
 PERSONALIDADE: Profissional, empática, baseada em evidências científicas, sempre focada no bem-estar do paciente e na excelência clínica.`,
       tags: ['identidade', 'missao', 'especialidades'],
       versao: '1.0.0',
-      dataAtualizacao: new Date(),
       autor: 'Dr. Ricardo Valença',
       prioridade: 'alta',
       ativo: true
@@ -91,7 +90,6 @@ METODOLOGIA: Aprendizado baseado em casos clínicos, discussões interdisciplina
 CERTIFICAÇÃO: Certificado de Especialização em Cannabis Medicinal Integrativa`,
       tags: ['curso_principal', 'pos_graduacao', 'cannabis_medicinal'],
       versao: '1.0.0',
-      dataAtualizacao: new Date(),
       autor: 'Dr. Eduardo de Sá Campello Faveret',
       prioridade: 'alta',
       ativo: true
@@ -133,7 +131,6 @@ COMPETÊNCIAS DESENVOLVIDAS:
 • Documentação clínica ética`,
       tags: ['modulo_transversal', 'arte_entrevista', 'aec', 'imre'],
       versao: '1.0.0',
-      dataAtualizacao: new Date(),
       autor: 'Dr. Ricardo Valença',
       prioridade: 'alta',
       ativo: true
@@ -176,7 +173,6 @@ APLICAÇÃO CLÍNICA:
 • Educação médica`,
       tags: ['imre', 'metodologia', 'entrevista_clinica', '28_blocos'],
       versao: '1.0.0',
-      dataAtualizacao: new Date(),
       autor: 'Dr. Ricardo Valença',
       prioridade: 'alta',
       ativo: true
@@ -217,7 +213,6 @@ INTEGRAÇÃO COM IMRE:
 • Recomendações personalizadas para cannabis`,
       tags: ['classificacao_renal', 'cannabis_medicinal', 'nefrologia', 'seguranca'],
       versao: '1.0.0',
-      dataAtualizacao: new Date(),
       autor: 'Dr. Ricardo Valença',
       prioridade: 'alta',
       ativo: true
@@ -298,7 +293,6 @@ APLICAÇÃO CLÍNICA:
         conteudo: modulo.conteudo,
         tags: [`modulo_${index + 1}`, 'cannabis', 'botanica', 'genetica'],
         versao: '1.0.0',
-        dataAtualizacao: new Date(),
         autor: 'Dr. Eduardo de Sá Campello Faveret',
         prioridade: 'media',
         ativo: true

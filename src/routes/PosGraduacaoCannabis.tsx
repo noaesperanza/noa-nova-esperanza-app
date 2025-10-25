@@ -152,25 +152,17 @@ const PosGraduacaoCannabis = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Header do Curso */}
           <CourseHeader
-            titulo="Curso de Pós-Graduação: Cannabis Medicinal Integrativa"
-            subtitulo="Versão Estendida com Conteúdos Modulares"
-            duracao="12 meses"
-            cargaHoraria="520 horas"
-            coordenacao="Dr. Eduardo de Sá Campello Faveret"
-            icone={<GraduationCap className="w-8 h-8" />}
-            cor="from-primary to-purple-600"
+            title="Curso de Pós-Graduação: Cannabis Medicinal Integrativa"
+            subtitle="Versão Estendida com Conteúdos Modulares"
+            duration="12 meses"
+            level="Especialização"
+            version="2025"
+            badge="520 horas"
           />
 
           {/* Objetivos do Curso */}
           <CourseObjectives
-            objetivos={[
-              "Formar especialistas em Cannabis Medicinal com visão integrativa e baseada em evidências",
-              "Desenvolver competências clínicas para prescrição segura e eficaz de produtos canabinoides",
-              "Integrar conhecimentos de medicina tradicional e complementar com cannabis medicinal",
-              "Preparar profissionais para pesquisa científica em cannabis medicinal",
-              "Aplicar metodologia AEC (Arte da Entrevista Clínica) na prática clínica",
-              "Desenvolver habilidades interdisciplinares para atendimento integral do paciente"
-            ]}
+            objective="Formar especialistas em Cannabis Medicinal com visão integrativa e baseada em evidências, desenvolvendo competências clínicas para prescrição segura e eficaz de produtos canabinoides, integrando conhecimentos de medicina tradicional e complementar, preparando profissionais para pesquisa científica e aplicando metodologia AEC na prática clínica."
           />
 
           {/* Competências Desenvolvidas */}
@@ -326,25 +318,12 @@ const PosGraduacaoCannabis = () => {
 
           {/* Certificação */}
           <CertificateBadge
-            titulo="Certificado de Especialização"
-            descricao="Certificado de Especialização em Cannabis Medicinal Integrativa"
-            requisitos={[
-              "Frequência mínima de 75%",
-              "Aprovação em todos os módulos",
-              "TCC aprovado",
-              "Participação em atividades práticas"
-            ]}
-            validacao="Reconhecido pelo Conselho Federal de Medicina"
+            title="Certificado de Especialização"
+            description="Certificado de Especialização em Cannabis Medicinal Integrativa reconhecido pelo Conselho Federal de Medicina. Requisitos: frequência mínima de 75%, aprovação em todos os módulos, TCC aprovado e participação em atividades práticas."
           />
 
           {/* CTA Final */}
-          <CourseCTA
-            titulo="Pronto para se especializar em Cannabis Medicinal?"
-            descricao="Junte-se à próxima turma e transforme sua prática clínica com conhecimentos integrativos e baseados em evidências."
-            botaoTexto="Inscrever-se no Curso"
-            link="/medcann-lab/ia-residente"
-            icone={<Award className="w-6 h-6" />}
-          />
+          <CourseCTA />
         </div>
       </div>
     </>

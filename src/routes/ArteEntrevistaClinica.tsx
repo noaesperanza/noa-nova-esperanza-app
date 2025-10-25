@@ -29,11 +29,16 @@ const ArteEntrevistaClinica = () => {
     'Capacitar profissionais de saúde a aplicarem a metodologia da Arte da Entrevista Clínica (AEC) no contexto da prescrição de cannabis medicinal, com ênfase na proteção da função renal, escuta simbólica e seguimento longitudinal.';
 
   const competencies = [
-    'Aplicar a abertura triaxial da escuta clínica.',
-    'Conduzir entrevistas com foco em sintomas neurológicos e função renal.',
-    'Identificar fatores de risco tradicionais e não tradicionais para DRC.',
-    'Registrar sinais verbais, paralinguísticos e narrativos do paciente.',
-    'Planejar condutas clínicas baseadas em vínculo e escuta profunda.'
+    {
+      categoria: 'Competências Técnicas',
+      itens: [
+        'Aplicar a abertura triaxial da escuta clínica.',
+        'Conduzir entrevistas com foco em sintomas neurológicos e função renal.',
+        'Identificar fatores de risco tradicionais e não tradicionais para DRC.',
+        'Registrar sinais verbais, paralinguísticos e narrativos do paciente.',
+        'Planejar condutas clínicas baseadas em vínculo e escuta profunda.'
+      ]
+    }
   ];
 
   const sections = [
@@ -41,6 +46,14 @@ const ArteEntrevistaClinica = () => {
       number: 1,
       title: 'Fundamentos da AEC',
       topics: [
+        'Origem e princípios da Arte da Entrevista Clínica.',
+        'A escuta como tecnologia simbólica e diagnóstica.',
+        'Papel da linguagem na prescrição canabinoide.'
+      ],
+      titulo: 'Fundamentos da AEC',
+      descricao: 'Origem e princípios da Arte da Entrevista Clínica.',
+      cargaHoraria: '2 horas',
+      conteudo: [
         'Origem e princípios da Arte da Entrevista Clínica.',
         'A escuta como tecnologia simbólica e diagnóstica.',
         'Papel da linguagem na prescrição canabinoide.'
@@ -53,12 +66,28 @@ const ArteEntrevistaClinica = () => {
         'Dimensão Biográfica: "Quem é você para além do sintoma?"',
         'Dimensão Clínica: "O que sente, quando, como e onde sente?"',
         'Dimensão Territorial/Simbólica: "O que no seu entorno piora ou melhora essa dor?"'
+      ],
+      titulo: 'Abertura Triaxial',
+      descricao: 'Dimensões da escuta clínica.',
+      cargaHoraria: '2 horas',
+      conteudo: [
+        'Dimensão Biográfica: "Quem é você para além do sintoma?"',
+        'Dimensão Clínica: "O que sente, quando, como e onde sente?"',
+        'Dimensão Territorial/Simbólica: "O que no seu entorno piora ou melhora essa dor?"'
       ]
     },
     {
       number: 3,
       title: 'Desenvolvimento Indiciário',
       topics: [
+        'Como formular perguntas abertas com potência diagnóstica.',
+        'Leitura dos pequenos sinais: pausas, metáforas e microexpressões.',
+        'Registro simbólico e clínico das narrativas.'
+      ],
+      titulo: 'Desenvolvimento Indiciário',
+      descricao: 'Técnicas de entrevista clínica.',
+      cargaHoraria: '2 horas',
+      conteudo: [
         'Como formular perguntas abertas com potência diagnóstica.',
         'Leitura dos pequenos sinais: pausas, metáforas e microexpressões.',
         'Registro simbólico e clínico das narrativas.'
@@ -71,6 +100,14 @@ const ArteEntrevistaClinica = () => {
         'Como a escuta molda o plano terapêutico em cannabis.',
         'Casos clínicos simulados de dor, sono e ansiedade.',
         'Relação entre eGFR, sintomas e escolha do quimiotipo canabinoide.'
+      ],
+      titulo: 'Cannabis e Escuta',
+      descricao: 'Aplicação da AEC na cannabis medicinal.',
+      cargaHoraria: '1 hora',
+      conteudo: [
+        'Como a escuta molda o plano terapêutico em cannabis.',
+        'Casos clínicos simulados de dor, sono e ansiedade.',
+        'Relação entre eGFR, sintomas e escolha do quimiotipo canabinoide.'
       ]
     },
     {
@@ -80,23 +117,48 @@ const ArteEntrevistaClinica = () => {
         'Técnica da devolutiva com vínculo: "O que construímos juntos até aqui?"',
         'Consentimento informado simbólico.',
         'Encaminhamento e plano de monitoramento.'
+      ],
+      titulo: 'Fechamento Consensual',
+      descricao: 'Finalização da entrevista clínica.',
+      cargaHoraria: '1 hora',
+      conteudo: [
+        'Técnica da devolutiva com vínculo: "O que construímos juntos até aqui?"',
+        'Consentimento informado simbólico.',
+        'Encaminhamento e plano de monitoramento.'
       ]
     }
   ];
 
   const practices = [
-    'Simulação de uma entrevista com paciente fictício (dor crônica + insônia).',
-    'Interpretação clínica e simbólica dos dados coletados.',
-    'Redação do plano terapêutico e acompanhamento.'
+    {
+      titulo: 'Simulação de Entrevista',
+      descricao: 'Simulação de uma entrevista com paciente fictício (dor crônica + insônia).',
+      duracao: '2 horas'
+    },
+    {
+      titulo: 'Interpretação Clínica',
+      descricao: 'Interpretação clínica e simbólica dos dados coletados.',
+      duracao: '1 hora'
+    },
+    {
+      titulo: 'Redação do Plano',
+      descricao: 'Redação do plano terapêutico e acompanhamento.',
+      duracao: '1 hora'
+    }
   ];
 
   const assessmentItems = [
-    'Apresentação de caso (vídeo ou texto)',
-    'Registro de escuta clínica com justificativa das perguntas utilizadas'
+    {
+      tipo: 'Apresentação de Caso',
+      peso: '60%',
+      descricao: 'Apresentação de caso (vídeo ou texto)'
+    },
+    {
+      tipo: 'Registro de Escuta',
+      peso: '40%',
+      descricao: 'Registro de escuta clínica com justificativa das perguntas utilizadas'
+    }
   ];
-
-  const assessmentCriteria = 
-    'Escuta ativa, linguagem ética, coerência clínica e narrativa';
 
   const references = [
     'Valença, R. (2002). O que se diz do que se vê. Dissertação – UFRJ.',
@@ -168,10 +230,10 @@ const ArteEntrevistaClinica = () => {
           </div>
 
           {/* Práticas Supervisionadas */}
-          <PracticeActivities activities={practices} />
+          <PracticeActivities atividades={practices} />
 
           {/* Avaliação */}
-          <Assessment items={assessmentItems} criteria={assessmentCriteria} />
+          <Assessment criterios={assessmentItems} />
 
           {/* Badge de Certificação */}
           <CertificateBadge

@@ -188,11 +188,11 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
       const resultado = sistemaIMRE.processarResposta(mensagem);
       
       // Coletar dados IMRE automaticamente
-      imreDataCollector.processarRespostaIMRE(sistemaIMRE.obterBlocoAtual()?.id || 0, mensagem);
+      imreDataCollector.processarRespostaIMRE((sistemaIMRE as any).obterBlocoAtual()?.id || 0, mensagem);
       
       if (resultado.proximaPergunta) {
         return resultado.proximaPergunta;
-      } else if (resultado.relatorio) {
+      } else if ((resultado as any).relatorio) {
         // Finalizar coleta de dados
         const dadosColetados = imreDataCollector.finalizarColeta();
         
@@ -211,7 +211,7 @@ export const AvatarNoaMultimodal = ({ context = 'geral', onMessage }: AvatarNoaM
         
         setEmAvaliacao(false);
         setSistemaIMRE(null);
-        return resultado.relatorio;
+        return (resultado as any).relatorio;
       }
     }
     

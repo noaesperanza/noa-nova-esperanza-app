@@ -84,7 +84,7 @@ export class IMREDataCollector {
 
   // Processar resposta do IMRE e extrair dados
   processarRespostaIMRE(blocoId: number, resposta: string): void {
-    const bloco = this.sistemaIMRE.obterBloco(blocoId);
+    const bloco = (this.sistemaIMRE as any).obterBloco(blocoId);
     if (!bloco) return;
 
     // Mapear resposta para estrutura semântica

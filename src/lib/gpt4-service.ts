@@ -23,7 +23,7 @@ export class GPT4Service {
   constructor() {
     // API Key deve ser configurada nas variáveis de ambiente
     // ou obtida de forma segura do backend
-    this.apiKey = import.meta.env.VITE_OPENAI_API_KEY || '';
+    this.apiKey = (import.meta as any).env?.VITE_OPENAI_API_KEY || '';
   }
 
   /**

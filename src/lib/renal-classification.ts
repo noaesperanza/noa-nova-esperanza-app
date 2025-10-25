@@ -266,7 +266,7 @@ export class RenalClassificationSystem {
 
   // Calcular GFR usando fórmula CKD-EPI
   calcularGFR(avaliacao: AvaliacaoRenal): number {
-    const { creatinina, idade, sexo, raca = 'não-afrodescendente' } = avaliacao;
+    const { creatinina, idade, sexo, raca = 'não-afrodescendente' } = avaliacao as any;
     
     // Fórmula CKD-EPI simplificada
     let gfr: number;

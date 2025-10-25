@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* MedCanLab Color Palette - Aplicada Globalmente */
+    /* MedCanLab Color Palette - Versão Original */
     --background: 222.2 84% 4.9%; /* Dark background */
     --foreground: 210 40% 98%; /* White text */
     --card: 217.2 32.6% 17.5%; /* Dark card */
@@ -16,7 +16,7 @@
     --secondary: 30 100% 50%; /* MedCanLab Orange */
     --secondary-foreground: 0 0% 100%; /* White text */
     --muted: 217.2 32.6% 17.5%; /* Dark muted */
-    --muted-foreground: 215 20.2% 65.1%; /* Light gray text */
+    --muted-foreground: 215 20.2% 65.1%; /* Gray text */
     --accent: 217 91% 60%; /* MedCanLab Teal accent */
     --accent-foreground: 0 0% 100%; /* White text */
     --destructive: 0 62.8% 30.6%; /* Red for errors */
@@ -25,10 +25,14 @@
     --input: 217.2 32.6% 17.5%; /* Dark inputs */
     --ring: 217 91% 60%; /* MedCanLab Teal focus ring */
     --radius: 0.5rem;
-    --premium: 217 91% 60%; /* MedCanLab Teal for premium */
+    
+    /* MedCanLab Brand Colors */
     --medcanlab-primary: 217 91% 60%; /* Teal principal */
     --medcanlab-secondary: 30 100% 50%; /* Laranja */
     --medcanlab-accent: 280 100% 70%; /* Roxo */
+    --medcanlab-success: 142 76% 36%; /* Verde */
+    --medcanlab-warning: 38 92% 50%; /* Amarelo */
+    --medcanlab-error: 0 62.8% 30.6%; /* Vermelho */
   }
 
   .dark {
@@ -52,10 +56,14 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 217 91% 60%;
-    --premium: 217 91% 60%;
+    
+    /* MedCanLab Brand Colors - Dark Mode */
     --medcanlab-primary: 217 91% 60%;
     --medcanlab-secondary: 30 100% 50%;
     --medcanlab-accent: 280 100% 70%;
+    --medcanlab-success: 142 76% 36%;
+    --medcanlab-warning: 38 92% 50%;
+    --medcanlab-error: 0 62.8% 30.6%;
   }
 }
 
@@ -63,82 +71,295 @@
   * {
     @apply border-border;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply text-foreground;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     /* MedCanLab Gradient Background */
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #374151 50%, #451a03 75%, #92400e 100%);
+    @apply text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Reset para elementos específicos */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+  
+  button {
+    @apply cursor-pointer;
+  }
+  
+  input, textarea, select {
+    @apply outline-none;
   }
 }
 
 @layer utilities {
-  .premium-background {
-    /* MedCanLab Gradient - baseado na imagem */
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #374151 50%, #451a03 75%, #92400e 100%);
-    min-height: 100vh;
-    overflow-x: hidden;
-    line-height: 1.6;
+  /* MedCanLab Background Gradients - Otimizados */
+  .medcanlab-gradient {
+    background: linear-gradient(135deg, 
+      hsl(217, 91%, 60%) 0%, 
+      hsl(30, 100%, 50%) 50%, 
+      hsl(280, 100%, 70%) 100%
+    );
   }
   
-  .medcanlab-gradient {
-    /* Gradiente principal do MedCanLab */
-    background: linear-gradient(135deg, #1e3a8a, #1e40af, #374151, #451a03, #92400e);
+  .medcanlab-gradient-subtle {
+    background: linear-gradient(135deg, 
+      hsl(217, 91%, 60%, 0.1) 0%, 
+      hsl(30, 100%, 50%, 0.1) 50%, 
+      hsl(280, 100%, 70%, 0.1) 100%
+    );
   }
   
   .medcanlab-header-gradient {
-    /* Gradiente do header (roxo para laranja) */
-    background: linear-gradient(90deg, #1e3a8a 0%, #92400e 100%);
+    background: linear-gradient(90deg, 
+      hsl(217, 91%, 60%) 0%, 
+      hsl(30, 100%, 50%) 100%
+    );
   }
   
+  /* MedCanLab Cards - Glassmorphism */
   .medcanlab-card {
-    /* Cards com estilo MedCanLab */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    @apply bg-white/5 backdrop-blur-sm border border-white/10;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   }
   
-  .medcanlab-button-primary {
-    /* Botão primário MedCanLab */
-    background: linear-gradient(135deg, #1e3a8a, #92400e);
-    color: white;
-    border: none;
-    transition: all 0.3s ease;
+  .medcanlab-card-dark {
+    @apply bg-black/20 backdrop-blur-sm border border-white/10;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
   
-  .medcanlab-button-primary:hover {
-    background: linear-gradient(135deg, #1e40af, #7c2d12);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+  /* MedCanLab Buttons - Otimizados */
+  .medcanlab-btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-orange-500 text-white font-medium px-6 py-3 rounded-lg;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:from-blue-700 hover:to-orange-600 hover:shadow-lg hover:-translate-y-0.5;
+    @apply active:translate-y-0 active:shadow-md;
   }
   
-  .medcanlab-button-secondary {
-    /* Botão secundário MedCanLab */
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+  .medcanlab-btn-secondary {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium px-6 py-3 rounded-lg;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:bg-white/20 hover:border-white/30 hover:shadow-lg;
   }
   
-  .medcanlab-button-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+  .medcanlab-btn-ghost {
+    @apply text-white font-medium px-6 py-3 rounded-lg;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:bg-white/10 hover:backdrop-blur-sm;
   }
   
+  /* MedCanLab Navigation */
   .medcanlab-nav-item {
-    /* Itens de navegação MedCanLab */
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
+    @apply text-white px-4 py-2 rounded-lg transition-all duration-300 ease-in-out;
+    @apply hover:bg-white/10 hover:backdrop-blur-sm;
   }
   
-  .medcanlab-nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+  .medcanlab-nav-item-active {
+    @apply bg-white/20 backdrop-blur-sm border border-white/30;
   }
+  
+  /* MedCanLab Status Colors */
+  .medcanlab-success {
+    @apply bg-green-500/20 text-green-400 border border-green-500/30;
+  }
+  
+  .medcanlab-warning {
+    @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/30;
+  }
+  
+  .medcanlab-error {
+    @apply bg-red-500/20 text-red-400 border border-red-500/30;
+  }
+  
+  .medcanlab-info {
+    @apply bg-blue-500/20 text-blue-400 border border-blue-500/30;
+  }
+  
+  /* MedCanLab Animations */
+  .medcanlab-pulse {
+    animation: medcanlab-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .medcanlab-bounce {
+    animation: medcanlab-bounce 1s infinite;
+  }
+  
+  .medcanlab-fade-in {
+    animation: medcanlab-fade-in 0.5s ease-in-out;
+  }
+  
+  .medcanlab-slide-up {
+    animation: medcanlab-slide-up 0.3s ease-out;
+  }
+}
+
+/* MedCanLab Keyframes */
+@keyframes medcanlab-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes medcanlab-bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes medcanlab-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes medcanlab-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* MedCanLab Utility Classes */
+.premium-background {
+  /* MedCanLab Gradient - baseado na imagem */
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #374151 50%, #451a03 75%, #92400e 100%);
+}
+
+.medcanlab-gradient {
+  /* Gradiente principal do MedCanLab */
+  background: linear-gradient(135deg, #1e3a8a, #1e40af, #374151, #451a03, #92400e);
+}
+
+.medcanlab-header-gradient {
+  /* Gradiente do header (roxo para laranja) */
+  background: linear-gradient(90deg, #1e3a8a 0%, #92400e 100%);
+}
+
+.medcanlab-card {
+  /* Cards com estilo MedCanLab */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.medcanlab-card-dark {
+  /* Cards escuros do MedCanLab */
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.medcanlab-btn-primary {
+  /* Botão primário MedCanLab */
+  background: linear-gradient(135deg, #1e3a8a, #92400e);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.medcanlab-btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #b45309);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.medcanlab-btn-secondary {
+  /* Botão secundário MedCanLab */
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.medcanlab-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.medcanlab-btn-ghost {
+  /* Botão ghost MedCanLab */
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.medcanlab-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.medcanlab-nav-item {
+  /* Item de navegação MedCanLab */
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.medcanlab-nav-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.medcanlab-nav-item-active {
+  /* Item de navegação ativo MedCanLab */
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.medcanlab-success {
+  /* Cor de sucesso MedCanLab */
+  color: #10b981;
+}
+
+.medcanlab-warning {
+  /* Cor de aviso MedCanLab */
+  color: #f59e0b;
+}
+
+.medcanlab-error {
+  /* Cor de erro MedCanLab */
+  color: #ef4444;
+}
+
+.medcanlab-info {
+  /* Cor de informação MedCanLab */
+  color: #3b82f6;
 }
 

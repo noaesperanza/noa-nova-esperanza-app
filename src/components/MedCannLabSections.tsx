@@ -39,13 +39,11 @@ export const SidebarPesquisa = () => {
       <div className="space-y-2">
         {recursos.map((recurso, index) => {
           const Icon = recurso.icon;
-          const Component = recurso.link ? Link : 'button';
-          const props = recurso.link ? { to: recurso.link } : { type: 'button' as const };
-          
-          return (
-            <Component
-              key={index}
-              {...props}
+          if (recurso.link) {
+            return (
+              <Link
+                key={index}
+                to={recurso.link}
               className={cn(
                 "w-full flex items-center justify-between p-3 rounded-lg hover:bg-accent transition-colors group",
                 recurso.link && "bg-primary/5 border border-primary/20",
@@ -81,9 +79,33 @@ export const SidebarPesquisa = () => {
                   {recurso.badge}
                 </span>
               )}
-            </Component>
-          );
-        })}
+             </Link>
+           );
+         } else {
+           return (
+             <button
+               key={index}
+               type="button"
+               className={cn(
+                 "w-full flex items-center justify-between p-3 rounded-lg hover:bg-accent transition-colors group",
+                 "bg-muted/50"
+               )}
+             >
+               <div className="flex items-center gap-3">
+                 <Icon size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                 <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                   {recurso.label}
+                 </span>
+               </div>
+               {recurso.badge && (
+                 <span className="text-xs px-2 py-1 rounded-full font-semibold bg-muted text-muted-foreground">
+                   {recurso.badge}
+                 </span>
+               )}
+             </button>
+           );
+         }
+         })}
       </div>
 
       <div className="pt-3 border-t border-border">
